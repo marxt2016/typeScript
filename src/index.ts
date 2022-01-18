@@ -3,10 +3,45 @@ import { renderSearchStubBlock } from "./search-results.js";
 import { renderUserBlock } from "./user.js";
 import { renderToast } from "./lib.js";
 
+let username: String;
+let avatarUrl: String;
+let favoritesAmount: Number;
+
+localStorage.setItem(
+  "user",
+  JSON.stringify({
+    username: "Wade Warren",
+    avatarUrl: "/public/img/avatar.png",
+  })
+);
+localStorage.setItem("favoritesAmount", "0");
+
+function getUserData(data: unknown) {
+  if (data) {
+    username = JSON.parse(localStorage.getItem("user")).username;
+    avatarUrl = JSON.parse(localStorage.getItem("user")).avatarUrl;
+  } else {
+    console.log("User not found");
+    return undefined;
+  }
+}
+
+function getFavoritesAmount(data: unknown) {
+  if (data) {
+    favoritesAmount = Number(localStorage.getItem("favoritesAmount"));
+  } else {
+    console.log("Favourites not found");
+    return undefined;
+  }
+}
+
+getUserData(JSON.parse(localStorage.getItem("user")));
+getFavoritesAmount(localStorage.getItem("favoritesAmount"));
+
 window.addEventListener("DOMContentLoaded", () => {
-  renderUserBlock("Wade Warren", "/public/img/avatar.png", 0);
+  renderUserBlock(username, avatarUrl);
   renderSearchFormBlock(new Date(), new Date());
-  console.log(new Date(2022, new Date().getMonth() + 2, 0));
+
   renderSearchStubBlock();
   renderToast(
     {

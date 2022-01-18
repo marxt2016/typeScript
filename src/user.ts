@@ -3,7 +3,7 @@ import { renderBlock } from "./lib.js";
 export function renderUserBlock(
   userName: String,
   avatarUrl: String,
-  favoriteItemsAmount: Number
+  favoriteItemsAmount?: Number
 ) {
   const favoritesCaption =
     favoriteItemsAmount > 0 ? favoriteItemsAmount : "ничего нет";
