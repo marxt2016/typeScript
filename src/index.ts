@@ -1,11 +1,11 @@
-import { renderSearchFormBlock } from "./search-form.js";
+import { renderSearchFormBlock, search, searchHandler } from "./search-form.js";
 import { renderSearchStubBlock } from "./search-results.js";
 import { renderUserBlock } from "./user.js";
 import { renderToast } from "./lib.js";
 
-let username: String;
-let avatarUrl: String;
-let favoritesAmount: Number;
+let username: string;
+let avatarUrl: string;
+let favoritesAmount: number;
 
 localStorage.setItem(
   "user",
@@ -40,7 +40,7 @@ getFavoritesAmount(localStorage.getItem("favoritesAmount"));
 
 window.addEventListener("DOMContentLoaded", () => {
   renderUserBlock(username, avatarUrl);
-  renderSearchFormBlock(new Date(), new Date());
+  renderSearchFormBlock();
 
   renderSearchStubBlock();
   renderToast(
@@ -55,4 +55,6 @@ window.addEventListener("DOMContentLoaded", () => {
       },
     }
   );
+
+  search(searchHandler());
 });
